@@ -1,0 +1,8 @@
+Django
+psycopg2
+djangorestframework
+django_redis
+drf-spectacular
+djangorestframework-simplejwt
+markdown       
+django-filter

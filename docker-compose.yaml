@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - app_network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - app_network
+
+  smtp:
+    image: rnwood/smtp4dev
+    ports:
+      - "8025:80"
+      - "2525:25"
+    restart: always
+    networks:
+      - app_network
+
+  backend:
+    build: .
+    env_file:
+      - .env
+    command: ["/wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:
