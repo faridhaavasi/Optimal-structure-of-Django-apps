@@ -38,21 +38,31 @@ To run the project, you need to create a `.env` file in the project's root direc
 
 4. **Run the project locally**:  
    Open your terminal and enter the following command to run the project in development mode:
+   1: 
       ```bash
    docker-compose --file docker-compose_dev.yml up -d
-   ```
+
+    ```
+   2:
    
    ```bash
    python -m venv venv
    ```
-   
+   3:
    ```bash
    venv\Scripts\activate
    ```
-   
+   4:
    ```bash
    pip install -r requirements.txt
    ```
+   5: create SECRET_KEY
+      
+   ```bash
+   from django.core.management.utils import get_random_secret_key
+    print(get_random_secret_key())
+   ```
+   
    
    ```bash
    python manage.py migrate
