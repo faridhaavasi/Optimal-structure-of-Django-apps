@@ -1,121 +1,79 @@
-# Django Project with Docker Compose
 
-This project uses Docker and Docker Compose to manage services in both **development** and **production** environments.
+# Django Monolithic Architecture
 
-## Table of Contents
+Inspired by this repository: [amirbahador-hub](https://github.com/amirbahador-hub/django_style_guide.git)
 
-1. [Project Overview](#project-overview)
-2. [Setting Up the Project](#setting-up-the-project)
-   1. [Create the Environment File (.env)](#create-the-environment-file-env)
-   2. [Set Up the Project in Development Environment](#set-up-the-project-in-development-environment)
-   3. [Set Up the Project in Production Environment](#set-up-the-project-in-production-environment)
-3. [Running the Project](#running-the-project)
-   1. [Start the Project in Development](#start-the-project-in-development)
-   2. [Start the Project in Production](#start-the-project-in-production)
-4. [Database Migrations](#database-migrations)
-5. [Generate New Crypto Key](#generate-new-crypto-key)
+## Running the Project
 
-## Project Overview
+To run the project, you need to create a `.env` file in the project's root directory and enter the required values. (Instructions are provided below)
 
-This project uses **Docker Compose** to orchestrate various services required by the Django project, including **PostgreSQL**, **Redis**, and **SMTP** for email testing. It includes configurations for both **development** and **production** environments.
+### Steps to Run the Project
 
-## Setting Up the Project
+1. **Create a .env file**:  
+   In the root directory of the project, create a file named `.env`.
 
-### 1. Create the Environment File (.env)
+2. **Set up the .env file**:  
+   Open the `.env` file and enter the necessary configuration values. Below is an example of the values you need to configure:
 
-Create a `.env` file in the root directory of the project and add the necessary configuration values. Below is a sample of the `.env` file:
+   ```env
+   SECRET_KEY='Django Secret Key, you can generate with get_random_secret_key() function from django.core.management.utils.'
 
-```env
-SECRET_KEY='Your Django secret key'
+   DEBUG=True  # Boolean value for development mode
 
-DEBUG=True  # Boolean value for development mode
+   WEB_DOMAIN=127.0.0.1
+   WEB_FRONT_DOMAIN=localhost:3000
 
-# Database settings
-POSTGRES_DB=database_name
-POSTGRES_USER=user_name
-POSTGRES_PASSWORD=password
-DB_HOST=db
+   DB_NAME=my_database
+   DB_USER=root
+   DB_PASS=mypassword
+   DB_PORT=5432
+   DB_HOST=myhost
+   DB_HOST_DEBUG=localhost
 
-# Redis settings
-REDIS_HOST=redis
-REDIS_PORT=6379
-2. Set Up the Project in Development Environment
-To set up the project in the development environment, follow these steps:
+   REDIS_HOST=redis_bio_host
+   REDIS_HOST_DEBUG=localhost
+   REDIS_PASSWORD=redis_bio_password
+   REDIS_PORT=6388
+   ```
 
-1. Create a Virtual Environment and Install Dependencies
-Run the following commands:
+3. **Run the project locally**:  
+   Open your terminal and enter the following command to run the project in development mode:
 
-bash
-Copy code
-# Create a virtual environment
-python -m venv venv
+   ```bash
+   docker-compose --file docker-compose-develop.yml up -d
+   ```
 
-# Activate the virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS or Linux:
-source venv/bin/activate
+4. **Run the project in production environment**:  
+   To deploy the project in production mode, use the following command:
 
-# Install the required dependencies
-pip install -r requirements.txt
-2. Start Docker Services in Development
-To run the necessary services in the development environment, use the docker-compose_dev.yml file:
+   ```bash
+   docker-compose up -d
+   ```
 
-bash
-Copy code
-docker-compose -f docker-compose_dev.yml up -d
-3. Run Database Migrations
-After setting up the services, run the migrations to set up your database:
+5. **Build the database and Redis containers**:  
+   To initialize the database and Redis containers, run the following command:
 
-bash
-Copy code
-python manage.py migrate
-4. Start the Development Server
-Finally, start the Django development server:
+   ```bash
+   docker-compose --file docker-compose-develop.yml up -d postgres_project redis_project
+   ```
 
-bash
-Copy code
-python manage.py runserver
-3. Set Up the Project in Production Environment
-To set up the project in a production environment using the standard Docker Compose, follow these steps:
+6. **Generate a new crypto key**:  
+   To generate a new cryptographic key, you can use the following Python code:
 
-Ensure that the .env file is filled with appropriate production settings.
-Run Docker Compose for production:
-bash
-Copy code
-docker-compose up -d
-This will start all the necessary services for the project in a production-ready configuration.
+   ```python
+   from Crypto import Random
 
-Running the Project
-1. Start the Project in Development
-To start the services in a development environment, use the following command:
+   key = Random.get_random_bytes(32)
+   ```
 
-bash
-Copy code
-docker-compose -f docker-compose_dev.yml up -d
-2. Start the Project in Production
-To run the services in a production environment, use the following command:
+## Setting Environment Variables
 
-bash
-Copy code
-docker-compose up -d
-Database Migrations
-After starting the services, don't forget to run the database migrations to set up the database schema:
+This project relies on environment variables to configure database, SMS service settings, etc. 
 
-bash
-Copy code
-python manage.py migrate
-Generate New Crypto Key
-To generate a new crypto key, you can use the following Python code:
+- Create a `.env` file in the root directory of the project and add the configuration values as shown above.
 
-python
-Copy code
-from Crypto import Random
+These environment variables will be used to configure the database, Redis, and other services dynamically based on the environment.
 
-key = Random.get_random_bytes(32)
-This README provides the full setup instructions for running the project in both development and production environments using Docker Compose.
+## Conclusion
 
-vbnet
-Copy code
-
-Let me know if you'd like any modifications to this!
+This README provides the steps to set up and run the Django project in both development and production environments using Docker Compose. Make sure to adjust the `.env` file with the appropriate configuration values for your system.
