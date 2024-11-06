@@ -13,26 +13,25 @@ To run the project, you need to create a `.env` file in the project's root direc
 
 2. **Set up the .env file**:  
    Open the `.env` file and enter the necessary configuration values. Below is an example of the values you need to configure:
-   
-POSTGRES_DB=mydatabase
-POSTGRES_USER=root
-POSTGRES_PASSWORD=my-password
-DB_HOST=db
-DB_PORT=5432
-
-# Redis configuration
-REDIS_HOST=redis
-REDIS_PORT=6379
-
-# Django configuration
-SECRET_KEY='8)dv2lc4^+f-zn7@a62dvty010r-#fp=6002o52%ndnw@cvf1_'
-DEBUG=True
-
-# from django.core.management.utils import get_random_secret_key
-# print(get_random_secret_key())
 
    ```env
    # Database configuration
+   POSTGRES_DB=mydatabase
+   POSTGRES_USER=root
+   POSTGRES_PASSWORD=my-password
+   DB_HOST=db
+   DB_PORT=5432
+   
+   # Redis configuration
+   REDIS_HOST=redis
+   REDIS_PORT=6379
+   # Django configuration
+   SECRET_KEY=''
+   DEBUG=True
+
+
+
+
 
 
 
@@ -41,7 +40,7 @@ DEBUG=True
    Open your terminal and enter the following command to run the project in development mode:
 
    ```bash
-   docker-compose --file docker-compose-develop.yml up -d
+   docker-compose --file docker-compose_dev.yml up -d
    ```
 
 5. **Run the project in production environment**:  
