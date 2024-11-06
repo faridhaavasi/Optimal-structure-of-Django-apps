@@ -1,7 +1,6 @@
 
-# Django Monolithic Architecture
+# Django 
 
-Inspired by this repository: [amirbahador-hub](https://github.com/amirbahador-hub/django_style_guide.git)
 
 ## Running the Project
 
@@ -20,21 +19,24 @@ To run the project, you need to create a `.env` file in the project's root direc
 
    DEBUG=True  # Boolean value for development mode
 
-   WEB_DOMAIN=127.0.0.1
-   WEB_FRONT_DOMAIN=localhost:3000
 
-   DB_NAME=my_database
-   DB_USER=root
-   DB_PASS=mypassword
-   DB_PORT=5432
-   DB_HOST=myhost
-   DB_HOST_DEBUG=localhost
+# Database configuration
+POSTGRES_DB=mydatabase
+POSTGRES_USER=root
+POSTGRES_PASSWORD=my-password
+DB_HOST=db
+DB_PORT=5432
 
-   REDIS_HOST=redis_bio_host
-   REDIS_HOST_DEBUG=localhost
-   REDIS_PASSWORD=redis_bio_password
-   REDIS_PORT=6388
-   ```
+# Redis configuration
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+# Django configuration
+SECRET_KEY='8)dv2lc4^+f-zn7@a62dvty010r-#fp=6002o52%ndnw@cvf1_'
+DEBUG=True
+
+# from django.core.management.utils import get_random_secret_key
+# print(get_random_secret_key())
 
 3. **Run the project locally**:  
    Open your terminal and enter the following command to run the project in development mode:
@@ -54,17 +56,12 @@ To run the project, you need to create a `.env` file in the project's root direc
    To initialize the database and Redis containers, run the following command:
 
    ```bash
-   docker-compose --file docker-compose-develop.yml up -d postgres_project redis_project
+   docker-compose --file docker-compose-developـ_dev.yml up -d 
    ```
 
 6. **Generate a new crypto key**:  
    To generate a new cryptographic key, you can use the following Python code:
 
-   ```python
-   from Crypto import Random
-
-   key = Random.get_random_bytes(32)
-   ```
 
 ## Setting Environment Variables
 
