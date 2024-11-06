@@ -40,7 +40,7 @@ To run the project, you need to create a `.env` file in the project's root direc
    Open your terminal and enter the following command to run the project in development mode:
    1: 
       ```bash
-   docker-compose --file docker-compose_dev.yml up -d
+   docker-compose --file docker-compose_dev.yaml up -d
 
     ```
    2:
@@ -85,7 +85,7 @@ To run the project, you need to create a `.env` file in the project's root direc
    To initialize the database and Redis containers, run the following command:
 
    ```bash
-   docker-compose --file docker-compose-_dev.yml up -d 
+   docker-compose --file docker-compose-_dev.yaml up -d 
    ```
 
 8. **Generate a new crypto key**:  
