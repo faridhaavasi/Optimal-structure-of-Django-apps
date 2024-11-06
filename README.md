@@ -13,14 +13,7 @@ To run the project, you need to create a `.env` file in the project's root direc
 
 2. **Set up the .env file**:  
    Open the `.env` file and enter the necessary configuration values. Below is an example of the values you need to configure:
-
-   ```env
-   SECRET_KEY='Django Secret Key, you can generate with get_random_secret_key() function from django.core.management.utils.'
-
-   DEBUG=True  # Boolean value for development mode
-
-
-# Database configuration
+   
 POSTGRES_DB=mydatabase
 POSTGRES_USER=root
 POSTGRES_PASSWORD=my-password
@@ -38,28 +31,34 @@ DEBUG=True
 # from django.core.management.utils import get_random_secret_key
 # print(get_random_secret_key())
 
-3. **Run the project locally**:  
+   ```env
+   # Database configuration
+
+
+
+
+4. **Run the project locally**:  
    Open your terminal and enter the following command to run the project in development mode:
 
    ```bash
    docker-compose --file docker-compose-develop.yml up -d
    ```
 
-4. **Run the project in production environment**:  
+5. **Run the project in production environment**:  
    To deploy the project in production mode, use the following command:
 
    ```bash
    docker-compose up -d
    ```
 
-5. **Build the database and Redis containers**:  
+6. **Build the database and Redis containers**:  
    To initialize the database and Redis containers, run the following command:
 
    ```bash
    docker-compose --file docker-compose-developـ_dev.yml up -d 
    ```
 
-6. **Generate a new crypto key**:  
+7. **Generate a new crypto key**:  
    To generate a new cryptographic key, you can use the following Python code:
 
 
