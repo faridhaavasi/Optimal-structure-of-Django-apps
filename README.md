@@ -38,26 +38,47 @@ To run the project, you need to create a `.env` file in the project's root direc
 
 4. **Run the project locally**:  
    Open your terminal and enter the following command to run the project in development mode:
-
-   ```bash
+      ```bash
    docker-compose --file docker-compose_dev.yml up -d
    ```
+   
+   ```bash
+   python -m venv venv
+   ```
+   
+   ```bash
+   venv\Scripts\activate
+   ```
+   
+   ```bash
+   pip install -r requirements.txt
+   ```
+   
+   ```bash
+   python manage.py migrate
+   ```
+   ```bash
+      python manage.py runserver   
+   ```
+   
 
-5. **Run the project in production environment**:  
+
+
+6. **Run the project in production environment**:  
    To deploy the project in production mode, use the following command:
 
    ```bash
    docker-compose up -d
    ```
 
-6. **Build the database and Redis containers**:  
+7. **Build the database and Redis containers**:  
    To initialize the database and Redis containers, run the following command:
 
    ```bash
    docker-compose --file docker-compose-developـ_dev.yml up -d 
    ```
 
-7. **Generate a new crypto key**:  
+8. **Generate a new crypto key**:  
    To generate a new cryptographic key, you can use the following Python code:
 
 
