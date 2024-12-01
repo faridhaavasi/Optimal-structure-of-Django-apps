@@ -36,27 +36,23 @@ To run the project, you need to create a `.env` file in the project's root direc
 
 
 
-4. **Run the project locally**:  
+3. **Run the project locally**:  
    Open your terminal and enter the following command to run the project in development mode:
-   1: 
-      ```bash
-   docker-compose -f docker-compose_dev.yaml up -d
 
-    ```
-   2:
+   1:
    
    ```bash
    python -m venv venv
    ```
-   3:
+   2:
    ```bash
    venv\Scripts\activate
    ```
-   4:
+   3:
    ```bash
    pip install -r requirements.txt
    ```
-   5: create SECRET_KEY
+   4: create SECRET_KEY
    ```bash
    python manage.py shell
    
