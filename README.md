@@ -57,6 +57,10 @@ To run the project, you need to create a `.env` file in the project's root direc
    pip install -r requirements.txt
    ```
    5: create SECRET_KEY
+   ```bash
+   python manage.py shell
+   
+   ```
       
    ```bash
    from django.core.management.utils import get_random_secret_key
@@ -65,10 +69,7 @@ To run the project, you need to create a `.env` file in the project's root direc
    
    
    ```bash
-   python manage.py migrate
-   ```
-   ```bash
-      python manage.py runserver   
+   docker-compose exec backend python manage.py (syntax)
    ```
    
 
@@ -78,28 +79,12 @@ To run the project, you need to create a `.env` file in the project's root direc
    To deploy the project in production mode, use the following command:
 
    ```bash
-   docker-compose up -d
+   docker-compose -f docker-compose-stage.yaml up --build -d
    ```
 
 7. **Build the database and Redis containers**:  
    To initialize the database and Redis containers, run the following command:
 
    ```bash
-   docker-compose -f docker-compose-_dev.yaml up -d 
+   docker-compose up --build -d 
    ```
-
-8. **Generate a new crypto key**:  
-   To generate a new cryptographic key, you can use the following Python code:
-
-
-## Setting Environment Variables
-
-This project relies on environment variables to configure database, SMS service settings, etc. 
-
-- Create a `.env` file in the root directory of the project and add the configuration values as shown above.
-
-These environment variables will be used to configure the database, Redis, and other services dynamically based on the environment.
-
-## Conclusion
-
-This README provides the steps to set up and run the Django project in both development and production environments using Docker Compose. Make sure to adjust the `.env` file with the appropriate configuration values for your system.
