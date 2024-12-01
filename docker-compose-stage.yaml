@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - app_network
+
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    depends_on:
+      - backend
+    ports: 
+      - "80:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/home/app/static
+      - media_volume:/home/app/media
+    networks:
+      - app_network
+  backend:
+    build: .
+    container_name: django-backend
+    environment:
+      - EMAIL_HOST=smtp4dev
+      - EMAIL_PORT=25
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=false
+    env_file:
+      - .env
+    command: /app/entrypoint.sh
+    depends_on:
+      - db
+      - redis
+    expose:
+      - 8000
+    restart: always
+    networks:
+      - app_network
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+
+
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  app_network:
