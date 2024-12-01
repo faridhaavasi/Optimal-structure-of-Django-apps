@@ -1,5 +1,5 @@
 
-# Django 
+# Optimal-structure-of-Django-apps
 
 
 ## Running the Project
