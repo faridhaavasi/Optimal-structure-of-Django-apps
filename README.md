@@ -63,10 +63,7 @@ To run the project, you need to create a `.env` file in the project's root direc
     print(get_random_secret_key())
    ```
    
-   
-   ```bash
-   docker-compose exec backend python manage.py (syntax)
-   ```
+
    
 
 
@@ -84,3 +81,7 @@ To run the project, you need to create a `.env` file in the project's root direc
    ```bash
    docker-compose up --build -d 
    ```
+     
+   ```bash
+   docker-compose exec backend python manage.py (syntax)
+   ``` 
