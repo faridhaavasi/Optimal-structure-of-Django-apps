@@ -59,8 +59,8 @@ To run the project, you need to create a `.env` file in the project's root direc
    ```
       
    ```bash
-   from django.core.management.utils import get_random_secret_key
-    key = get_random_secret_key()
+   >>> from django.core.management.utils import get_random_secret_key
+   >>> key = get_random_secret_key()
     # key == SECRET_KEY   
    ```
    
