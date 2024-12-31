@@ -29,7 +29,8 @@ To run the project, you need to create a `.env` file in the project's root direc
    SECRET_KEY=''
    DEBUG=True
 
-
+   # Sentry 
+   SENTRY_DSN    
 
 
 
@@ -64,6 +65,10 @@ To run the project, you need to create a `.env` file in the project's root direc
     # key == SECRET_KEY   
    ```
    
+   ```
+      login sentry.io
+
+   ```
 
    
 
