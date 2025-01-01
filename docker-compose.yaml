@@ -75,47 +75,7 @@ services:
 
     volumes:
       - .:/app
-  
-  sentry:
-    image: sentry
-    links:
-     - redis
-     - db
-    ports:
-     - 9000:9000
-    environment:
-      SENTRY_SECRET_KEY: '!!!SECRET!!!'
-      SENTRY_POSTGRES_HOST: ${POSTGRES_HOST}
-      SENTRY_DB_USER: ${POSTGRES_USER}
-      SENTRY_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      SENTRY_REDIS_HOST: redis
-
-  cron:
-    image: sentry
-    links:
-     - redis
-     - db
-    command: "sentry run cron"
-    environment:
-      SENTRY_SECRET_KEY: ${SECRET_KEY}
-      SENTRY_POSTGRES_HOST: ${POSTGRES_HOST}
-      SENTRY_DB_USER: ${POSTGRES_USER}
-      SENTRY_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      SENTRY_REDIS_HOST: redis
-
-  worker:
-    image: sentry
-    links:
-     - redis
-     - db
-    command: "sentry run worker"
-    environment:
-      SENTRY_SECRET_KEY: ${SECRET_KEY}
-      SENTRY_POSTGRES_HOST: ${POSTGRES_HOST}
-      SENTRY_DB_USER: ${POSTGRES_USER}
-      SENTRY_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      SENTRY_REDIS_HOST: redis
-
+ 
  
 volumes:
   postgres_data:
