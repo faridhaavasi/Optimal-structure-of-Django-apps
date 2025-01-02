@@ -64,7 +64,17 @@ services:
       - static_volume:/app/static
       - media_volume:/app/media
 
-
+  worker_celery:
+    build: .
+    container_name: celery-worker
+    command: celery -A core worker --loglevel=info
+    depends_on:
+      - redis
+      - backend
+    networks:
+      - app_network
+    volumes:
+      - .:/app
 
 volumes:
   postgres_data:

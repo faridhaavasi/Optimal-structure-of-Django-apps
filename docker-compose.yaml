@@ -1,5 +1,6 @@
-services:
+version: "3.9"
 
+services:
   db:
     image: postgres:15
     environment:
@@ -22,66 +23,47 @@ services:
     restart: always
     networks:
       - app_network
+
   smtp4dev:
     image: rnwood/smtp4dev:v3
     restart: always
     ports:
-      # Change the number before : to the port the web interface should be accessible on
-      - '5000:80'
-      # Change the number before : to the port the SMTP server should be accessible on
-      - '25:25'
-      # Change the number before : to the port the IMAP server should be accessible on
-      - '143:143'
+      - '5000:80'  # Web interface
+      - '25:25'    # SMTP server
+      - '143:143'  # IMAP server
     volumes:
-      # This is where smtp4dev stores the database..
-        - smtp4dev-data:/smtp4dev
+      - smtp4dev-data:/smtp4dev
     environment:
-      # Uncomment to customise these settings
-      # This is not a complete list of the available settings.
-      # See the documentation in appsettings.json for a full list.
-
-      #Specifies the virtual path from web server root where SMTP4DEV web interface will be hosted. e.g. "/" or "/smtp4dev"
-      #- ServerOptions__BasePath=/smtp4dev
-
-      #Specifies the URLs the web UI will use inside the container.
       - ServerOptions__Urls=http://*:80
-
-      #Specifies the server hostname. Used in auto-generated TLS certificate if enabled.
       - ServerOptions__HostName=smtp4dev
-
     networks:
-      - app_network 
-  
+      - app_network
 
   backend:
     container_name: backend
-    build: .
+    build:
+      context: .
     environment:
       - EMAIL_HOST=smtp4dev
       - EMAIL_PORT=25
       - SECRET_KEY=${SECRET_KEY}
     env_file:
       - .env
-    command: ["/wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
       - db
       - redis
-      
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     ports:
       - "8000:8000"
     restart: always
     networks:
       - app_network
-
     volumes:
       - .:/app
- 
- 
+
 volumes:
   postgres_data:
   smtp4dev-data:
-
-
 
 networks:
   app_network:

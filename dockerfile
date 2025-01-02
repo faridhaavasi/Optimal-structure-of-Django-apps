@@ -17,10 +17,3 @@ COPY . .
 # Add and set permissions for wait-for-it script (for dependency readiness)
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
-
-# Add and set permissions for entrypoint script
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-# Set entrypoint
-ENTRYPOINT ["/app/entrypoint.sh"]
