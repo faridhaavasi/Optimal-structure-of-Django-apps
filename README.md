@@ -65,14 +65,14 @@ To run the project, you need to create a `.env` file in the project's root direc
     # key == SECRET_KEY   
    ```
    
-   ```
+   **Hint 
       Sentry is used for the logging process.
       Read the documentation from the link below
 
       https://sentry.io
    
 
-   ```
+   
 
    
 
