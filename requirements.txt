@@ -17,3 +17,4 @@ sentry-sdk[django]
 # production
 gunicorn
 django-cors-headers
+pyjwt
