@@ -46,8 +46,13 @@ To run the project, you need to create a `.env` file in the project's root direc
    python -m venv venv
    ```
    2:
+      windows:
    ```bash
    venv\Scripts\activate
+   ```
+      linux:
+   ```bash
+   source venv/bin/activate
    ```
    3:
    ```bash
